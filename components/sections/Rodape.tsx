@@ -14,7 +14,7 @@ export function Rodape() {
         <p className="font-display text-2xl font-bold">Vamos marcar sua consulta?</p>
 
         <div className="mt-6">
-          <WhatsappCta full />
+          <WhatsappCta full variant="inverse" />
         </div>
 
         <div className="mt-10 space-y-2 text-sm text-white/80">

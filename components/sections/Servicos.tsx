@@ -10,13 +10,16 @@ import { WhatsappCta } from '../WhatsappCta';
 export function Servicos() {
   return (
     <Section id="servicos" title="O que a Anna Luiza cuida">
-      <ul className="space-y-4">
+      <ul className="space-y-2">
         {site.services.map((s) => (
-          <li key={s.title} className="rounded-lg border border-petroleo/15 p-4">
-            <h3 className="font-display text-lg font-bold text-petroleo">
+          <li
+            key={s.title}
+            className="rounded-lg border border-petroleo/15 px-3 py-2"
+          >
+            <h3 className="font-display text-sm font-bold text-petroleo">
               {s.title}
             </h3>
-            <p className="mt-1 text-sm text-petroleo-muted">{s.description}</p>
+            <p className="mt-0.5 text-xs text-petroleo-muted">{s.description}</p>
           </li>
         ))}
       </ul>

@@ -1,5 +1,6 @@
 import { Section } from '../Section';
 import { WhatsappCta } from '../WhatsappCta';
+import { AgendamentoCard } from '../AgendamentoCard';
 
 /**
  * Como funciona a primeira consulta — 3 passos. Tira o medo do desconhecido
@@ -9,7 +10,7 @@ import { WhatsappCta } from '../WhatsappCta';
 const steps = [
   { n: '1', title: 'Você manda mensagem', text: 'Pelo WhatsApp, sem formulário.' },
   { n: '2', title: 'A gente agenda', text: 'Escolhemos o melhor horário para você.' },
-  { n: '3', title: 'Você é atendida', text: 'Avaliação e plano de cuidado, sem promessa vazia.' },
+  { n: '3', title: 'Atendemos você', text: 'Avaliação e plano de cuidado, sem promessa vazia.' },
 ];
 
 export function ComoFunciona() {
@@ -32,7 +33,13 @@ export function ComoFunciona() {
       </ol>
 
       <div className="mt-8">
-        <WhatsappCta />
+        <AgendamentoCard />
+      </div>
+      <div className="mt-4">
+        <WhatsappCta
+          variant="link"
+          label="Prefere falar antes? Chame no WhatsApp"
+        />
       </div>
     </Section>
   );

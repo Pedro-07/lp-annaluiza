@@ -60,8 +60,6 @@ export const site = {
     // Q8 — posicionamento dela: "Trabalho com muita dedicação em cada
     // sorriso." Editado para tagline curta, sem fato/adjetivo novo.
     positioning: 'Dedicação em cada sorriso.',
-    // Monograma "nn" em vetor — preenche os quadrados do pattern. Item 15.
-    monogram: pending('Monograma "nn" em vetor para o pattern (item 15)'),
   },
 
   // Número confirmado — CTAs ativos. `e164` alimenta o link do wa.me.
@@ -74,6 +72,16 @@ export const site = {
     whatsappMessage: 'Olá! Vim pelo site e gostaria de marcar uma consulta.',
     instagram: '@annaluiza.odontologia',
     email: 'annaluizaodontologia@gmail.com',
+  },
+
+  // Agendamento online — caminho PRINCIPAL. Plataforma externa (dados
+  // tratados por ela; ver linha de LGPD no card). Abre em nova aba.
+  scheduling: {
+    platform: 'Simples Dental',
+    url: 'https://app.simplesdental.com/simples/agendamento/annaluizaodontologia',
+    // Troca para "Solicitar horário" se a plataforma só solicitar e não
+    // confirmar o horário na hora (a confirmar com a cliente).
+    ctaLabel: 'Agendar online',
   },
 
   // Exigência do Código de Ética: em destaque, não só no rodapé.
@@ -176,12 +184,12 @@ export const site = {
   seo: {
     // Deriva do posicionamento dela + método de agendamento. Sem invenção.
     description:
-      'Odontologia com dedicação em cada sorriso. Agende sua consulta pelo WhatsApp.',
+      'Odontologia com dedicação em cada sorriso. Agende sua consulta online ou pelo WhatsApp.',
   },
 
   // Pilares da marca — dados do briefing, não dependem da cliente.
   pillars: [
-    { name: 'Atendimento', note: 'Você é ouvida antes de qualquer procedimento.' },
+    { name: 'Atendimento', note: 'Ouvimos você antes de qualquer procedimento.' },
     { name: 'Satisfação', note: 'Cuidado que continua depois que você sai.' },
     { name: 'Expressão', note: 'Seu sorriso, do seu jeito.' },
   ],

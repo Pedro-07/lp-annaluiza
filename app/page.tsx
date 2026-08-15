@@ -18,8 +18,8 @@ export default function Page() {
       <main className="pb-24 md:pb-0">
         <Hero />
         <Pilares />
-        <Servicos />
         <Sobre />
+        <Servicos />
         <ComoFunciona />
         <Localizacao />
         <Faq />

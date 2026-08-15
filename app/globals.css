@@ -8,6 +8,8 @@
   }
   body {
     @apply bg-white text-petroleo font-sans antialiased;
+    /* A página nunca rola na horizontal (faixa do pattern, watermark). */
+    overflow-x: hidden;
   }
   /* Foco = petróleo, sempre. Ciano reprova o mínimo de 3:1 sobre branco.
      Ver docs/design/paleta-contraste.md. */
