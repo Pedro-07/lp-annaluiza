@@ -8,6 +8,7 @@ import { site } from '@/content/site';
  * variant 'solid'   — petróleo com texto branco (padrão, sobre fundo claro)
  * variant 'inverse' — branco com texto petróleo (sobre fundo petróleo, 13.9:1)
  * variant 'link'    — link de menor peso (alternativa ao agendamento online)
+ * variant 'link-inverse' — o mesmo link, claro, sobre fundo petróleo
  */
 export function WhatsappCta({
   label = 'Marcar consulta no WhatsApp',
@@ -16,19 +17,23 @@ export function WhatsappCta({
 }: {
   label?: string;
   full?: boolean;
-  variant?: 'solid' | 'inverse' | 'link';
+  variant?: 'solid' | 'inverse' | 'link' | 'link-inverse';
 }) {
   const href = `https://wa.me/${site.contact.whatsapp.e164}?text=${encodeURIComponent(
     site.contact.whatsappMessage,
   )}`;
 
-  if (variant === 'link') {
+  if (variant === 'link' || variant === 'link-inverse') {
+    const linkTone =
+      variant === 'link-inverse'
+        ? 'text-white/80 hover:text-white'
+        : 'text-petroleo hover:text-petroleo-hover';
     return (
       <a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-1.5 text-sm font-semibold text-petroleo underline underline-offset-4 hover:text-petroleo-hover"
+        className={`inline-flex items-center gap-1.5 text-sm font-semibold underline underline-offset-4 ${linkTone}`}
       >
         {label}
       </a>

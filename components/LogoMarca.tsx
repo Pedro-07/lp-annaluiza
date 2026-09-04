@@ -14,14 +14,19 @@ import { MonogramaGlifo } from './MonogramaGlifo';
 export function LogoMarca({
   className,
   style,
+  bare = false,
 }: {
   className?: string;
   style?: CSSProperties;
+  /** Sem o painel petróleo — para usar sobre um fundo já petróleo. */
+  bare?: boolean;
 }) {
   return (
     <span
       className={
-        'inline-flex flex-col rounded-2xl bg-petroleo px-6 py-5 ' +
+        (bare
+          ? 'inline-flex flex-col '
+          : 'inline-flex flex-col rounded-2xl bg-petroleo px-6 py-5 ') +
         (className ?? '')
       }
       style={style}
