@@ -3,6 +3,7 @@ import { Field } from '../Field';
 import { WhatsappCta } from '../WhatsappCta';
 import { AgendamentoCard } from '../AgendamentoCard';
 import { MonogramaGlifo } from '../MonogramaGlifo';
+import { LogoMarca } from '../LogoMarca';
 
 /**
  * Herói — quem é, o que resolve, e a ação. Primeira tela do celular.
@@ -16,13 +17,11 @@ export function Hero() {
       <MonogramaGlifo className="pointer-events-none absolute -right-10 -top-6 h-64 w-64 text-ciano opacity-20" />
 
       <div className="relative mx-auto w-full max-w-content">
-        {/* Marca — wordmark em Comfortaa */}
-        <p className="font-display text-xl font-bold text-petroleo">
-          {site.brand.name}
-        </p>
+        {/* Marca — logotipo oficial recriado (carinha em SVG) */}
+        <LogoMarca />
 
         {/* Posicionamento — headline, com peso e respiro (não é legenda) */}
-        <h1 className="mt-6 font-display text-3xl font-bold leading-tight text-petroleo sm:text-4xl">
+        <h1 className="mt-6 font-display text-2xl font-semibold leading-tight text-petroleo-muted sm:text-3xl">
           <Field value={site.brand.positioning} />
         </h1>
 

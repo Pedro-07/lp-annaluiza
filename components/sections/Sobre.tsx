@@ -12,10 +12,11 @@ import { Field } from '../Field';
 export function Sobre() {
   return (
     <Section id="sobre" title="Quem vai te atender">
-      {/* Foto profissional — item 16, pendente */}
-      <div className="mb-6 text-sm">
-        <Field value={site.about.photo} />
-      </div>
+      {/*
+        Foto profissional — item 16, ainda PENDENTE (site.about.photo).
+        O selo âmbar na tela foi removido a pedido; quando a foto autorizada
+        chegar, renderizar aqui (ex.: <Image .../>) usando site.about.photo.
+      */}
 
       {/* Nome + CRO no mesmo peso visual — destaque exigido */}
       <div className="rounded-lg border border-petroleo/15 p-4">

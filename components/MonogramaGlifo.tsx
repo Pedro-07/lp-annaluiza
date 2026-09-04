@@ -13,9 +13,12 @@ import type { CSSProperties } from 'react';
 export function MonogramaGlifo({
   className,
   style,
+  rotation = 10,
 }: {
   className?: string;
   style?: CSSProperties;
+  /** Inclinação do glifo. 10° é o padrão do selo; use 0 no wordmark reto. */
+  rotation?: number;
 }) {
   return (
     <svg
@@ -30,7 +33,7 @@ export function MonogramaGlifo({
       aria-hidden="true"
       focusable="false"
     >
-      <g transform="rotate(10 102 95)">
+      <g transform={`rotate(${rotation} 102 95)`}>
         <path d="M36,91 L36,60.5 A26.5,26.5 0 0 1 89,60.5 L89,91" />
         <path d="M116,91 L116,60.5 A26.5,26.5 0 0 1 169,60.5 L169,91" />
         <path d="M47,138 Q102,170 157,138" />
