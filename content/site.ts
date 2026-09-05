@@ -55,6 +55,10 @@ export interface FaqItem {
 }
 
 export const site = {
+  // URL canônica de produção. UMA constante alimenta canonical, Open Graph,
+  // sitemap, robots e JSON-LD. Canônico definido COM www — trocar aqui se mudar.
+  url: 'https://www.annaluizaodontologia.com.br',
+
   brand: {
     name: 'Anna Luiza Odontologia',
     // Q8 — posicionamento dela: "Trabalho com muita dedicação em cada
@@ -114,6 +118,12 @@ export const site = {
       { label: 'Sábado', days: ['Saturday'], opens: '08:00', closes: '12:00' },
     ] satisfies readonly OpeningHours[],
     urgency: 'Agendamento pelo WhatsApp; presencial quando há vaga.',
+    // Perfil da Empresa no Google — maior fator de SEO local. Entra em sameAs +
+    // hasMap; as coordenadas habilitam o bloco geo do JSON-LD.
+    // URL canônica via Place ID (estável). Place ID: ChIJP6vnCQCJ9gcR2jp_233CnUc.
+    googleMapsUrl:
+      'https://www.google.com/maps/place/?q=place_id:ChIJP6vnCQCJ9gcR2jp_233CnUc',
+    geo: { latitude: -2.5635838, longitude: -44.3323919 },
   },
 
   // 6 serviços. Cada descrição é o PROBLEMA na linguagem do paciente (quem

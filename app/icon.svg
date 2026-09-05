@@ -1,0 +1,10 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Anna Luiza Odontologia">
+  <rect width="512" height="512" rx="112" fill="#002F4A"/>
+  <svg x="108" y="118" width="296" height="276" viewBox="0 0 204 190">
+    <g fill="none" stroke="#00C9D1" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M36,91 L36,60.5 A26.5,26.5 0 0 1 89,60.5 L89,91"/>
+      <path d="M116,91 L116,60.5 A26.5,26.5 0 0 1 169,60.5 L169,91"/>
+      <path d="M47,138 Q102,170 157,138"/>
+    </g>
+  </svg>
+</svg>
