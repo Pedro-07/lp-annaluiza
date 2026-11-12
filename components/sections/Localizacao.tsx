@@ -8,9 +8,7 @@ import { Section } from '../Section';
  */
 export function Localizacao() {
   const address = site.location.address;
-  const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    formatAddress(address),
-  )}`;
+  const mapsHref = site.location.directionsUrl;
 
   return (
     <Section id="localizacao" title="Onde e quando">

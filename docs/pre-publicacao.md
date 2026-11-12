@@ -44,7 +44,7 @@ Pendências que dependem da cliente / do ambiente:
 |---|------|-----------|------|
 | 5 | **Domínio de produção** — confirmado `www.annaluizaodontologia.com.br` (canônico COM www em `site.url`); falta apenas apontar o DNS/hospedagem | canonical, OG, sitemap, robots, JSON-LD | Verificação |
 | — | ~~Link do Perfil da Empresa no Google~~ | Resolvido: `location.googleMapsUrl` (Place ID) → `sameAs` + `hasMap` | — |
-| — | ~~Coordenadas (lat/long)~~ | Resolvido: `location.geo` (-2.5635838, -44.3323919) → `geo` | — |
+| — | ~~Coordenadas (lat/long)~~ | Resolvido: `location.geo` (-2.5637982, -44.332349 — pino do perfil) → `geo` | — |
 
 Ações off-site (não são código, mas fazem o SEO acontecer):
 - Criar/otimizar o **Perfil da Empresa no Google** (maior fator de SEO local).

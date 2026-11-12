@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { site, formatAddress } from '@/content/site';
+import { site } from '@/content/site';
 import { Field } from '../Field';
 import { LogoMarca } from '../LogoMarca';
 import { MonogramaGlifo } from '../MonogramaGlifo';
@@ -26,9 +26,7 @@ export function Hero() {
   const whatsHref = `https://wa.me/${site.contact.whatsapp.e164}?text=${encodeURIComponent(
     site.contact.whatsappMessage,
   )}`;
-  const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    formatAddress(site.location.address),
-  )}`;
+  const mapsHref = site.location.directionsUrl;
 
   return (
     // A tela principal ocupa exatamente uma tela (100svh): metade foto, metade

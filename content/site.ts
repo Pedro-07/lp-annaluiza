@@ -132,7 +132,14 @@ export const site = {
     // URL canônica via Place ID (estável). Place ID: ChIJP6vnCQCJ9gcR2jp_233CnUc.
     googleMapsUrl:
       'https://www.google.com/maps/place/?q=place_id:ChIJP6vnCQCJ9gcR2jp_233CnUc',
-    geo: { latitude: -2.5635838, longitude: -44.3323919 },
+    // Link dos botões "Como chegar" / "Ver rota no mapa": abre o PERFIL da
+    // clínica (nome, fotos, avaliações, botão Rotas) no app ou no navegador.
+    // Formato oficial "Maps URLs" (query + query_place_id) — mesmo perfil do
+    // link curto maps.app.goo.gl/bud1rLsxTfJZFr5HA enviado pela cliente.
+    directionsUrl:
+      'https://www.google.com/maps/search/?api=1&query=Anna%20Luiza%20Odontologia&query_place_id=ChIJP6vnCQCJ9gcR2jp_233CnUc',
+    // Coordenadas do pino do perfil (conferidas no link da cliente, nov/2026).
+    geo: { latitude: -2.5637982, longitude: -44.332349 },
   },
 
   // 6 serviços. Cada descrição é o PROBLEMA na linguagem do paciente (quem
