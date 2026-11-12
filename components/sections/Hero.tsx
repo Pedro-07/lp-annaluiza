@@ -7,11 +7,11 @@ import { MonogramaGlifo } from '../MonogramaGlifo';
 /**
  * Tela principal — formato "guia de links", pensado para o celular.
  *
- *  ┌ foto (~40% da tela) ─┐  foto da profissional/clínica + H1 por cima
+ *  ┌ foto (50% da tela) ──┐  foto da profissional/clínica + H1 por cima
  *  ├ painel branco ───────┤  outra cor: botões grandes (agendar, WhatsApp,
  *  │                      │  como chegar). Instagram fica de fora: quase
  *  │                      │  todo mundo chega aqui vindo de lá.
- *  └ ⌄ mais informações ──┘  a próxima seção aparece no fim da tela
+ *  └ ⌄ mais informações ──┘  fecha a tela; o resto vem ao rolar/tocar
  *
  * Sem foto (site.hero.photo = null) o topo usa o fundo petróleo com o
  * monograma — a página continua bonita até a foto autorizada chegar.
@@ -31,9 +31,13 @@ export function Hero() {
   )}`;
 
   return (
-    <header id="hero" className="bg-white">
-      {/* ── Topo: foto + H1 ─────────────────────────────────────────── */}
-      <div className="relative h-[42svh] min-h-[17rem] max-h-[28rem] overflow-hidden bg-petroleo">
+    // A tela principal ocupa exatamente uma tela (100svh): metade foto, metade
+    // botões, e "Mais informações" fechando o rodapé da tela. O resto do site
+    // só aparece ao rolar ou tocar em "Mais informações".
+    <header id="hero" className="flex min-h-[100svh] flex-col bg-white">
+      {/* ── Topo: foto + H1 — 50% da tela; 40% em telas baixas (iPhone SE
+             e afins) para os três botões nunca saírem da primeira tela ── */}
+      <div className="relative h-[50svh] min-h-[14rem] flex-none overflow-hidden bg-petroleo [@media(max-height:680px)]:h-[40svh]">
         {photo ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -70,8 +74,8 @@ export function Hero() {
       </div>
 
       {/* ── Painel de botões (outra cor, sobe por cima da foto) ─────── */}
-      <div className="relative -mt-6 rounded-t-[1.75rem] bg-white px-5 pt-6">
-        <nav aria-label="Atalhos" className="mx-auto w-full max-w-content">
+      <div className="relative -mt-6 flex flex-1 flex-col rounded-t-[1.75rem] bg-white px-5 pt-6">
+        <nav aria-label="Atalhos" className="mx-auto flex w-full max-w-content flex-1 flex-col">
           <ul className="space-y-3">
             <li>
               <HubLink
@@ -100,10 +104,10 @@ export function Hero() {
             </li>
           </ul>
 
-          {/* Convite para rolar — a próxima seção já aparece logo abaixo */}
+          {/* Convite para rolar — preso ao fim da tela (mt-auto) */}
           <a
             href="#sobre"
-            className="mt-6 flex flex-col items-center gap-1 pb-2 text-xs font-semibold uppercase tracking-[0.12em] text-petroleo-muted hover:text-petroleo"
+            className="mt-auto flex flex-col items-center gap-1 pb-4 pt-6 text-xs font-semibold uppercase tracking-[0.12em] text-petroleo-muted hover:text-petroleo"
           >
             Mais informações
             <svg
