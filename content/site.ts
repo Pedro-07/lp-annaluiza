@@ -66,6 +66,15 @@ export const site = {
     positioning: 'Dedicação em cada sorriso.',
   },
 
+  // Foto do topo da tela principal (~40% da tela no celular). Enquanto for
+  // null, o topo usa o fundo petróleo com o monograma. Para ativar: salve a
+  // foto em public/ (ex. public/foto-hero.jpg, ~1200px de largura) e troque
+  // por { src: '/foto-hero.jpg', alt: '...', position: 'center 30%' }.
+  // `position` ajusta o enquadramento (o rosto deve ficar no terço de cima).
+  hero: {
+    photo: null as null | { src: string; alt: string; position?: string },
+  },
+
   // Número confirmado — CTAs ativos. `e164` alimenta o link do wa.me.
   // A conferência do número dígito a dígito segue na checklist pré-publicação.
   contact: {
@@ -168,12 +177,17 @@ export const site = {
   },
 
   // FAQ — objeções de agendamento, convênio, pagamento e urgência.
-  // "Primeira consulta" saiu daqui: já é a seção "Como funciona".
+  // "Primeira consulta" voltou para cá quando a seção "Como funciona" saiu.
   faq: [
     {
       question: 'Como faço para agendar?',
       answer:
-        'O agendamento é pelo WhatsApp. Também dá para marcar presencialmente quando há vaga.',
+        'Pelo botão "Agendar online", escolhendo dia e horário, ou pelo WhatsApp. Também dá para marcar presencialmente quando há vaga.',
+    },
+    {
+      question: 'Como é a primeira consulta?',
+      answer:
+        'É uma avaliação: a gente conversa, examina e monta com você um plano de cuidado, sem promessa vazia.',
     },
     {
       question: 'Vocês atendem por convênio?',

@@ -1,66 +1,213 @@
-import { site } from '@/content/site';
+import type { ReactNode } from 'react';
+import { site, formatAddress } from '@/content/site';
 import { Field } from '../Field';
-import { WhatsappCta } from '../WhatsappCta';
-import { MonogramaGlifo } from '../MonogramaGlifo';
 import { LogoMarca } from '../LogoMarca';
+import { MonogramaGlifo } from '../MonogramaGlifo';
 
 /**
- * Herói — enxuto de propósito: uma decisão, não três. Logo → tagline + uma
- * linha de apoio concreta → UMA ação principal (botão ciano pill sobre o azul,
- * o único ponto ciano da dobra) → um secundário discreto no WhatsApp.
+ * Tela principal — formato "guia de links", pensado para o celular.
  *
- * Fundo petróleo, texto branco; botão ciano com texto petróleo (uso nobre do
- * ciano, ver docs/design/paleta-contraste.md) é onde o olho deve cair.
- * CRO/responsável saiu daqui: segue em destaque no Sobre e no rodapé (regra
- * "em destaque, não só no rodapé" cumprida).
+ *  ┌ foto (~40% da tela) ─┐  foto da profissional/clínica + H1 por cima
+ *  ├ painel branco ───────┤  outra cor: botões grandes (agendar, WhatsApp,
+ *  │                      │  como chegar). Instagram fica de fora: quase
+ *  │                      │  todo mundo chega aqui vindo de lá.
+ *  └ ⌄ mais informações ──┘  a próxima seção aparece no fim da tela
+ *
+ * Sem foto (site.hero.photo = null) o topo usa o fundo petróleo com o
+ * monograma — a página continua bonita até a foto autorizada chegar.
+ *
+ * Cores dentro de docs/design/paleta-contraste.md: texto branco sobre
+ * petróleo/foto escurecida; ícone petróleo sobre círculo ciano (6.8:1);
+ * botão principal petróleo com texto branco.
  */
 export function Hero() {
-  const s = site.scheduling;
-  const { city, state } = site.location.address;
+  const photo = site.hero.photo;
+  const { neighborhood, city } = site.location.address;
+  const whatsHref = `https://wa.me/${site.contact.whatsapp.e164}?text=${encodeURIComponent(
+    site.contact.whatsappMessage,
+  )}`;
+  const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    formatAddress(site.location.address),
+  )}`;
 
   return (
-    <header
-      id="hero"
-      className="relative overflow-hidden bg-petroleo px-5 pb-14 pt-16 text-white"
-    >
-      {/* Marca d'água: o traço grande do monograma, discreto, no canto. */}
-      <MonogramaGlifo className="pointer-events-none absolute -right-10 -top-6 h-64 w-64 text-ciano opacity-[0.08]" />
-
-      <div className="relative mx-auto w-full max-w-content">
-        {/* Marca — logotipo, sem painel sobre o azul */}
-        <LogoMarca bare />
-
-        {/* Assinatura da marca + uma linha de apoio concreta (o que é/onde) */}
-        <h1 className="mt-8 font-display text-2xl font-semibold leading-tight text-white sm:text-3xl">
-          <Field value={site.brand.positioning} />
-        </h1>
-        <p className="mt-3 text-sm text-white/65">
-          Odontologia em {city} – {state} · atendimento particular, com hora
-          marcada.
-        </p>
-
-        {/* Ação principal — botão ciano pill direto sobre o azul (sem card) */}
-        <div className="mt-8">
-          <a
-            href={s.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-[3.25rem] w-full items-center justify-center rounded-full bg-ciano px-8 py-4 text-base font-semibold text-petroleo shadow-sm transition-colors hover:bg-ciano/90"
-          >
-            {s.ctaLabel}
-          </a>
-          {/* Disclaimer enxuto — detalhe do momento do clique, não de entrada */}
-          <p className="mt-2 text-xs text-white/45">Agendamento via {s.platform}</p>
-        </div>
-
-        {/* Secundário discreto — WhatsApp. A barra fixa só aparece após o hero. */}
-        <div className="mt-5">
-          <WhatsappCta
-            variant="link-inverse"
-            label="Prefere falar antes? Chame no WhatsApp"
+    <header id="hero" className="bg-white">
+      {/* ── Topo: foto + H1 ─────────────────────────────────────────── */}
+      <div className="relative h-[42svh] min-h-[17rem] max-h-[28rem] overflow-hidden bg-petroleo">
+        {photo ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={photo.src}
+            alt={photo.alt}
+            className="absolute inset-0 h-full w-full object-cover"
+            style={{ objectPosition: photo.position ?? 'center 30%' }}
+            fetchPriority="high"
           />
+        ) : (
+          <MonogramaGlifo className="pointer-events-none absolute -right-12 -top-8 h-72 w-72 text-ciano opacity-[0.1]" />
+        )}
+
+        {/* Escurece a base da foto para o H1 branco ler bem em qualquer imagem */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-t from-petroleo via-petroleo/40 to-transparent"
+        />
+
+        <div className="relative mx-auto flex h-full w-full max-w-content flex-col justify-between px-5 pb-10 pt-6">
+          <div className="self-start">
+            <LogoMarca bare className="origin-top-left scale-[0.7]" />
+          </div>
+
+          <div>
+            <h1 className="font-display text-[1.75rem] font-bold leading-tight text-white sm:text-4xl">
+              <Field value={site.brand.positioning} />
+            </h1>
+            <p className="mt-2 text-sm text-white/80">
+              {site.responsible.name} · {site.responsible.cro} · {city}
+            </p>
+          </div>
         </div>
       </div>
+
+      {/* ── Painel de botões (outra cor, sobe por cima da foto) ─────── */}
+      <div className="relative -mt-6 rounded-t-[1.75rem] bg-white px-5 pt-6">
+        <nav aria-label="Atalhos" className="mx-auto w-full max-w-content">
+          <ul className="space-y-3">
+            <li>
+              <HubLink
+                href={site.scheduling.url}
+                primary
+                icon={<IconCalendar />}
+                title={site.scheduling.ctaLabel}
+                note="Escolha dia e horário em poucos toques"
+              />
+            </li>
+            <li>
+              <HubLink
+                href={whatsHref}
+                icon={<IconWhatsapp />}
+                title="Falar no WhatsApp"
+                note={site.contact.whatsapp.display}
+              />
+            </li>
+            <li>
+              <HubLink
+                href={mapsHref}
+                icon={<IconPin />}
+                title="Como chegar"
+                note={`${neighborhood}, ${city}`}
+              />
+            </li>
+          </ul>
+
+          {/* Convite para rolar — a próxima seção já aparece logo abaixo */}
+          <a
+            href="#sobre"
+            className="mt-6 flex flex-col items-center gap-1 pb-2 text-xs font-semibold uppercase tracking-[0.12em] text-petroleo-muted hover:text-petroleo"
+          >
+            Mais informações
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              className="h-5 w-5 animate-bounce motion-reduce:animate-none"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </a>
+        </nav>
+      </div>
     </header>
+  );
+}
+
+/** Botão do guia: ícone · título + linha de apoio · seta. Área de toque ≥ 56px. */
+function HubLink({
+  href,
+  icon,
+  title,
+  note,
+  primary = false,
+}: {
+  href: string;
+  icon: ReactNode;
+  title: string;
+  note: string;
+  primary?: boolean;
+}) {
+  const tone = primary
+    ? 'bg-petroleo text-white hover:bg-petroleo-hover'
+    : 'border border-petroleo/15 bg-white text-petroleo hover:border-petroleo/40';
+  const noteTone = primary ? 'text-white/75' : 'text-petroleo-muted';
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`flex min-h-[3.5rem] items-center gap-3 rounded-2xl px-3 py-2.5 shadow-sm transition-colors ${tone}`}
+    >
+      <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-ciano text-petroleo">
+        {icon}
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block text-base font-semibold leading-tight">{title}</span>
+        <span className={`block truncate text-xs ${noteTone}`}>{note}</span>
+      </span>
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        className="h-5 w-5 flex-none opacity-60"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="m9 6 6 6-6 6" />
+      </svg>
+    </a>
+  );
+}
+
+const iconProps = {
+  'aria-hidden': true,
+  viewBox: '0 0 24 24',
+  className: 'h-5 w-5',
+  fill: 'none',
+  stroke: 'currentColor',
+  strokeWidth: 2,
+  strokeLinecap: 'round',
+  strokeLinejoin: 'round',
+} as const;
+
+function IconCalendar() {
+  return (
+    <svg {...iconProps}>
+      <rect x="3" y="4" width="18" height="18" rx="2" />
+      <path d="M16 2v4M8 2v4M3 10h18M9 16l2 2 4-4" />
+    </svg>
+  );
+}
+
+function IconPin() {
+  return (
+    <svg {...iconProps}>
+      <path d="M12 22s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12Z" />
+      <circle cx="12" cy="10" r="2.5" />
+    </svg>
+  );
+}
+
+function IconWhatsapp() {
+  return (
+    <svg {...iconProps}>
+      <path d="M3 21l1.65-4.95A8.5 8.5 0 1 1 8 19.6L3 21Z" />
+      <path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.8-1.8l.8-1-1-2L9 9.5Z" />
+    </svg>
   );
 }

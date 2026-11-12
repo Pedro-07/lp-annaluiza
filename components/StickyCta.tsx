@@ -1,13 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { WhatsappCta } from './WhatsappCta';
+import { site } from '@/content/site';
 
 /**
- * CTA fixo no rodapé da viewport — só no mobile, e só DEPOIS que o usuário
- * rola além do hero. No hero, o secundário discreto do WhatsApp já basta; a
- * barra entra quando o hero sai de vista, para não competir com o CTA principal
- * na primeira dobra. Some no desktop (md+), onde os CTAs inline bastam.
+ * Barra fixa no rodapé da viewport — só no mobile, e só DEPOIS que o guia de
+ * botões do topo sai de vista. Repete as duas ações principais lado a lado:
+ * Agendar online (principal, petróleo) | WhatsApp (contorno). Some no desktop.
  */
 export function StickyCta() {
   const [visible, setVisible] = useState(false);
@@ -26,6 +25,12 @@ export function StickyCta() {
     return () => io.disconnect();
   }, []);
 
+  const whatsHref = `https://wa.me/${site.contact.whatsapp.e164}?text=${encodeURIComponent(
+    site.contact.whatsappMessage,
+  )}`;
+  const btn =
+    'inline-flex min-h-[3rem] flex-1 items-center justify-center rounded-cta px-4 text-sm font-semibold transition-colors';
+
   return (
     <div
       aria-hidden={!visible}
@@ -33,8 +38,25 @@ export function StickyCta() {
         visible ? 'translate-y-0' : 'translate-y-full'
       }`}
     >
-      <div className="mx-auto w-full max-w-content">
-        <WhatsappCta full />
+      <div className="mx-auto flex w-full max-w-content gap-2">
+        <a
+          href={site.scheduling.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          tabIndex={visible ? undefined : -1}
+          className={`${btn} bg-petroleo text-white hover:bg-petroleo-hover`}
+        >
+          {site.scheduling.ctaLabel}
+        </a>
+        <a
+          href={whatsHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          tabIndex={visible ? undefined : -1}
+          className={`${btn} border border-petroleo text-petroleo hover:bg-petroleo/5`}
+        >
+          WhatsApp
+        </a>
       </div>
     </div>
   );

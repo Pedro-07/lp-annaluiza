@@ -1,11 +1,10 @@
 import { site } from '@/content/site';
 import { Section } from '../Section';
-import { WhatsappCta } from '../WhatsappCta';
 
 /**
  * Serviços — lista enxuta para a pessoa se reconhecer num tratamento.
  * Não é catálogo: cada item traz o problema na linguagem do paciente.
- * CTA ao fim, quando ela acabou de achar o próprio motivo.
+ * Sem CTA próprio: a ação fica na barra fixa e no rodapé.
  */
 export function Servicos() {
   return (
@@ -23,10 +22,6 @@ export function Servicos() {
           </li>
         ))}
       </ul>
-
-      <div className="mt-8">
-        <WhatsappCta label="Tirar minha dúvida no WhatsApp" />
-      </div>
     </Section>
   );
 }
