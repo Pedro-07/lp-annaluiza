@@ -7,7 +7,7 @@ import { MonogramaGlifo } from '../MonogramaGlifo';
 /**
  * Tela principal — formato "guia de links", pensado para o celular.
  *
- *  ┌ foto (50% da tela) ──┐  foto da profissional/clínica + H1 por cima
+ *  ┌ foto (55% da tela) ──┐  foto da profissional/clínica + H1 por cima
  *  ├ painel branco ───────┤  outra cor: botões grandes (agendar, WhatsApp,
  *  │                      │  como chegar). Instagram fica de fora: quase
  *  │                      │  todo mundo chega aqui vindo de lá.
@@ -29,13 +29,15 @@ export function Hero() {
   const mapsHref = site.location.directionsUrl;
 
   return (
-    // A tela principal ocupa exatamente uma tela (100svh): metade foto, metade
+    // A tela principal ocupa exatamente uma tela (100svh): ~55% foto, o resto
     // botões, e "Mais informações" fechando o rodapé da tela. O resto do site
     // só aparece ao rolar ou tocar em "Mais informações".
     <header id="hero" className="flex min-h-[100svh] flex-col bg-white">
-      {/* ── Topo: foto + H1 — 50% da tela; 40% em telas baixas (iPhone SE
-             e afins) para os três botões nunca saírem da primeira tela ── */}
-      <div className="relative h-[50svh] min-h-[14rem] flex-none overflow-hidden bg-petroleo [@media(max-height:680px)]:h-[40svh]">
+      {/* ── Topo: foto + H1 — 55% da tela. Medido no navegador do Instagram
+             (iPhone, ~650px visíveis): com 55% os três botões e "Mais
+             informações" cabem com folga. Só telas realmente baixas (≤600px,
+             ex. iPhone SE dentro do Instagram) caem para 45%. ── */}
+      <div className="relative h-[55svh] min-h-[14rem] flex-none overflow-hidden bg-petroleo [@media(max-height:600px)]:h-[45svh]">
         {photo ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
